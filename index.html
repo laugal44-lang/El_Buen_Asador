@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>El Buen Asador | Restaurante Argentino</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #7a1f1f;
+      --secondary: #f4f1ec;
+      --dark: #1c1c1c;
+      --accent: #d4a373;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: var(--secondary);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+    header {
+      background: linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.6)), url('https://images.unsplash.com/photo-1551183053-bf91a1d81141');
+      background-size: cover;
+      background-position: center;
+      height: 90vh;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
+      margin-bottom: 10px;
+    }
+    header p { font-size: 1.2rem; margin-bottom: 20px; }
+    header button {
+      padding: 15px 35px;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      border-radius: 30px;
+      transition: .3s;
+    }
+    header button:hover { background: var(--accent); color: #000; }
+
+    nav {
+      position: sticky;
+      top: 0;
+      background: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+      z-index: 1000;
+      box-shadow: 0 4px 10px rgba(0,0,0,.1);
+    }
+    nav ul { list-style: none; display: flex; gap: 20px; }
+    nav a { text-decoration: none; color: var(--dark); font-weight: 500; }
+    nav a:hover { color: var(--primary); }
+
+    section { padding: 80px 40px; max-width: 1200px; margin: auto; }
+    section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      text-align: center;
+      color: var(--primary);
+    }
+
+    .menu {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+    .card {
+      background: #fff;
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,.1);
+      transition: transform .3s;
+    }
+    .card:hover { transform: translateY(-8px); }
+    .card h3 { margin-bottom: 10px; }
+    .price { color: var(--primary); font-weight: 700; }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .gallery img {
+      width: 100%;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: transform .3s;
+    }
+    .gallery img:hover { transform: scale(1.05); }
+
+    .contact {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+    }
+    form input, form textarea, form button {
+      width: 100%;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-family: inherit;
+    }
+    form button {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+    form button:hover { background: var(--accent); color: #000; }
+
+    footer {
+      background: var(--dark);
+      color: #fff;
+      text-align: center;
+      padding: 25px;
+    }
+
+    /* WhatsApp flotante */
+    .whatsapp {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background: #25D366;
+      color: #fff;
+      font-size: 28px;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      text-decoration: none;
+      box-shadow: 0 8px 20px rgba(0,0,0,.3);
+      z-index: 2000;
+    }
+    .whatsapp:hover { transform: scale(1.1); }
+
+    /* Mercado Pago */
+    .mpago {
+      position: fixed;
+      bottom: 25px;
+      left: 25px;
+      background: #009ee3;
+      padding: 15px 20px;
+      border-radius: 30px;
+      box-shadow: 0 8px 20px rgba(0,0,0,.3);
+      z-index: 2000;
+    }
+    .mpago a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.8);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <strong>El Buen Asador</strong>
+  <ul>
+    <li><a href="#menu">Menú</a></li>
+    <li><a href="#galeria">Galería</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+</nav>
+
+<header>
+  <h1>El Buen Asador</h1>
+  <p>Auténtica parrilla argentina & vinos seleccionados</p>
+  <button onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})">Ver Menú</button>
+</header>
+
+<section id="menu">
+  <h2>Menú Destacado</h2>
+  <div class="menu">
+    <div class="card"><h3>Asado de Tira</h3><p>Clásico argentino a la parrilla</p><span class="price">$8.500</span></div>
+    <div class="card"><h3>Vacío</h3><p>Tierno y jugoso</p><span class="price">$7.800</span></div>
+    <div class="card"><h3>Milanesa Napolitana</h3><p>Con papas fritas</p><span class="price">$6.200</span></div>
+    <div class="card"><h3>Empanadas Criollas</h3><p>Docena</p><span class="price">$4.500</span></div>
+  </div>
+</section>
+
+<section id="galeria">
+  <h2>Galería</h2>
+  <div class="gallery">
+    <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092" onclick="openModal(this.src)">
+    <img src="https://images.unsplash.com/photo-1558030006-450675393462" onclick="openModal(this.src)">
+    <img src="https://images.unsplash.com/photo-1625944525533-473f1a3f93e9" onclick="openModal(this.src)">
+  </div>
+</section>
+
+<section id="contacto">
+  <h2>Contacto & Reservas</h2>
+  <div class="contact">
+    <form onsubmit="enviarReserva(event)">
+      <input type="text" placeholder="Nombre" required>
+      <input type="email" placeholder="Email" required>
+      <input type="date" required>
+      <textarea placeholder="Mensaje"></textarea>
+      <button type="submit">Reservar</button>
+    </form>
+    <iframe src="https://www.google.com/maps?q=Buenos%20Aires&output=embed" style="border:0;width:100%;height:300px;border-radius:20px" allowfullscreen=""></iframe>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 El Buen Asador - Restaurante Argentino</p>
+</footer>
+
+<!-- WhatsApp flotante -->
+<a href="https://wa.me/5491123456789?text=Hola%20quiero%20hacer%20una%20reserva" target="_blank" class="whatsapp">💬</a>
+
+<!-- Botón Mercado Pago -->
+<div class="mpago">
+  <a href="https://www.mercadopago.com.ar" target="_blank">Pagar Reserva</a>
+</div>
+
+<div class="modal" id="modal" onclick="this.style.display='none'">
+  <img id="modalImg">
+</div>
+
+<script>
+  function openModal(src) {
+    document.getElementById('modal').style.display = 'flex';
+    document.getElementById('modalImg').src = src;
+  }
+  function enviarReserva(e) {
+    e.preventDefault();
+    alert('¡Reserva enviada! Te contactaremos pronto.');
+    e.target.reset();
+  }
+</script>
+
+</body>
+</html>
