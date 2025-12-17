@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Admin | El Buen Asador</title>
+<style>
+body{font-family:Arial;background:#f4f1ec;padding:40px}
+input,button{padding:10px;margin:5px;width:100%}
+.card{background:#fff;padding:20px;border-radius:10px;margin-top:20px}
+</style>
+</head>
+<body>
+
+
+<h2>Panel Administrador</h2>
+
+
+<div class="card">
+<input id="nombre" placeholder="Nombre del plato">
+<input id="descripcion" placeholder="Descripción">
+<input id="precio" placeholder="Precio">
+<button onclick="agregarPlato()">Agregar plato</button>
+</div>
+
+
+<div class="card" id="lista"></div>
+
+
+<script src="admin.js"></script>
+</body>
+</html>
