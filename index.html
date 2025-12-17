@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>El Buen Asador | Restaurante Argentino</title>
+  <title>El Verdadero Asado | Restaurante Argentino</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -186,7 +186,7 @@
 <body>
 
 <nav>
-  <strong>El Buen Asador</strong>
+  <strong>El Verdadero Asado</strong>
   <ul>
     <li><a href="#menu">Menú</a></li>
     <li><a href="#galeria">Galería</a></li>
@@ -195,19 +195,23 @@
 </nav>
 
 <header>
-  <h1>El Buen Asador</h1>
+  <h1>El Verdadero Asado</h1>
   <p>Auténtica parrilla argentina & vinos seleccionados</p>
   <button onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})">Ver Menú</button>
 </header>
 
+<section>
+  <h2>Nuestra Historia</h2>
+  <p style="max-width:800px;margin:auto;text-align:center">
+    Desde hace más de 20 años ofrecemos la auténtica experiencia
+    de la parrilla argentina, con carnes seleccionadas y atención
+    de primera.
+  </p>
+</section>
+
 <section id="menu">
   <h2>Menú Destacado</h2>
-  <div class="menu">
-    <div class="card"><h3>Asado de Tira</h3><p>Clásico argentino a la parrilla</p><span class="price">$8.500</span></div>
-    <div class="card"><h3>Vacío</h3><p>Tierno y jugoso</p><span class="price">$7.800</span></div>
-    <div class="card"><h3>Milanesa Napolitana</h3><p>Con papas fritas</p><span class="price">$6.200</span></div>
-    <div class="card"><h3>Empanadas Criollas</h3><p>Docena</p><span class="price">$4.500</span></div>
-  </div>
+ <div class="menu" id="menuContainer"></div>
 </section>
 
 <section id="galeria">
@@ -234,11 +238,11 @@
 </section>
 
 <footer>
-  <p>© 2025 El Buen Asador - Restaurante Argentino</p>
+  <p>© 2025 El Verdadero Asado - Restaurante Argentino</p>
 </footer>
 
 <!-- WhatsApp flotante -->
-<a href="https://wa.me/5491123456789?text=Hola%20quiero%20hacer%20una%20reserva" target="_blank" class="whatsapp">💬</a>
+<a href="https://wa.me/5493624917978?text=Hola%20quiero%20hacer%20una%20reserva" target="_blank" class="whatsapp">💬</a>
 
 <!-- Botón Mercado Pago -->
 <div class="mpago">
@@ -254,11 +258,57 @@
     document.getElementById('modal').style.display = 'flex';
     document.getElementById('modalImg').src = src;
   }
-  function enviarReserva(e) {
-    e.preventDefault();
-    alert('¡Reserva enviada! Te contactaremos pronto.');
-    e.target.reset();
+ function enviarReserva(e) {
+  e.preventDefault();
+
+  const nombre = e.target[0].value;
+  const email = e.target[1].value;
+  const fecha = e.target[2].value;
+  const mensaje = e.target[3].value;
+
+  const texto = `Hola, soy ${nombre}.
+Email: ${email}
+Fecha de reserva: ${fecha}
+Mensaje: ${mensaje}`;
+
+  window.open(
+    `https://wa.me/5493624917978?text=`,
+    "_blank"
+  );
+
+  e.target.reset();
+}
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const menuContainer = document.getElementById("menuContainer");
+
+  if (!menuContainer) {
+    console.error("❌ No existe #menuContainer");
+    return;
   }
+
+  const data = localStorage.getItem("menu");
+  console.log("📦 Datos crudos:", data);
+
+  const platos = data ? JSON.parse(data) : [];
+
+  if (platos.length === 0) {
+    menuContainer.innerHTML = "<p>No hay platos cargados</p>";
+    return;
+  }
+
+  platos.forEach(p => {
+    menuContainer.innerHTML += `
+      <div class="card">
+        <h3>${p.nombre}</h3>
+        <p>${p.descripcion}</p>
+        <span class="price">$${p.precio}</span>
+      </div>
+    `;
+  });
+});
 </script>
 
 </body>
